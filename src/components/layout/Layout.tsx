@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -124,6 +125,7 @@ const Layout: React.FC = () => {
         <main className="flex-1 p-6 overflow-y-auto bg-gray-50">
           <Outlet />
         </main>
+      </div>
 
       {/* Footer */}
       <footer className="bg-primary text-primary-foreground py-4 text-center text-sm">
