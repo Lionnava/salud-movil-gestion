@@ -18,6 +18,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 // App Pages
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import ReportesIndex from "./pages/reportes/ReportesIndex";
 
 // Medicamentos
 import MedicamentosIndex from "./pages/medicamentos/MedicamentosIndex";
@@ -98,6 +99,9 @@ const AppRoutes = () => {
         <Route path="tratamientos">
           <Route index element={<TratamientosIndex />} />
         </Route>
+
+        {/* Reportes */}
+        <Route path="reportes" element={<ReportesIndex />} />
       </Route>
       
       {/* Ruta para 404 */}

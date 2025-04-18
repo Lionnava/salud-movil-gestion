@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -17,7 +16,8 @@ import {
   User, 
   Users, 
   Calendar, 
-  ClipboardList, 
+  ClipboardList,
+  FileText,
   LogOut, 
   ChevronDown,
   Settings
@@ -111,6 +111,11 @@ const Layout: React.FC = () => {
             <Link to="/tratamientos" className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-100">
               <ClipboardList size={18} />
               <span>Tratamientos</span>
+            </Link>
+            
+            <Link to="/reportes" className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-100">
+              <FileText size={18} />
+              <span>Reportes</span>
             </Link>
           </nav>
         </aside>
