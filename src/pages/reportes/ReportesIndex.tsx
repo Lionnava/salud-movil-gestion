@@ -16,8 +16,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
+import { exportarReporte } from "@/services/reportes.service";
 
 const ReportesIndex = () => {
+  const { toast } = useToast();
+  
   const reportes = [
     {
       id: 'pacientes',
@@ -39,9 +43,54 @@ const ReportesIndex = () => {
     }
   ];
 
-  const handleExportar = (reporteId: string, formato: string) => {
-    console.log(`Exportando reporte ${reporteId} en formato ${formato}`);
-    // Aquí implementaremos la lógica de exportación
+  const handleExportar = async (reporteId: string, formato: string) => {
+    try {
+      await exportarReporte(reporteId, formato);
+      toast({
+        title: "Exportación exitosa",
+        description: `El reporte se ha exportado en formato ${formato.toUpperCase()}`,
+      });
+    } catch (error) {
+      toast({
+        title: "Error al exportar",
+        description: "No se pudo generar el reporte. Intente nuevamente.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleImprimir = async (reporteId: string) => {
+    try {
+      const datos = await exportarReporte(reporteId, 'pdf');
+      // Aquí implementaremos la lógica de impresión utilizando los datos
+      window.print();
+      toast({
+        title: "Impresión iniciada",
+        description: "El reporte se ha enviado a la impresora",
+      });
+    } catch (error) {
+      toast({
+        title: "Error al imprimir",
+        description: "No se pudo imprimir el reporte. Intente nuevamente.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleDescargar = async (reporteId: string) => {
+    try {
+      await exportarReporte(reporteId, 'pdf');
+      toast({
+        title: "Descarga iniciada",
+        description: "El reporte comenzará a descargarse automáticamente",
+      });
+    } catch (error) {
+      toast({
+        title: "Error al descargar",
+        description: "No se pudo descargar el reporte. Intente nuevamente.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -75,11 +124,21 @@ const ReportesIndex = () => {
                   </Select>
                 </div>
                 <div className="flex justify-between">
-                  <Button variant="outline" size="sm" className="w-[48%]">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="w-[48%]"
+                    onClick={() => handleImprimir(reporte.id)}
+                  >
                     <Printer className="h-4 w-4 mr-2" />
                     Imprimir
                   </Button>
-                  <Button variant="outline" size="sm" className="w-[48%]">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="w-[48%]"
+                    onClick={() => handleDescargar(reporte.id)}
+                  >
                     <Download className="h-4 w-4 mr-2" />
                     Descargar
                   </Button>
