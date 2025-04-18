@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { FileText, Download, Printer, FileSpreadsheet, FileChart } from 'lucide-react';
+import { FileText, Download, Printer, FileSpreadsheet, FileLineChart } from 'lucide-react';
 import {
   Card,
   CardContent,
@@ -35,7 +35,7 @@ const ReportesIndex = () => {
       id: 'citas',
       titulo: 'Reporte de Citas',
       descripcion: 'Historial de citas médicas y estadísticas',
-      icon: FileChart
+      icon: FileLineChart
     }
   ];
 
